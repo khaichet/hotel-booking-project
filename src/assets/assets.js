@@ -10,6 +10,8 @@ import roomService from "./food-serving.png"
 import laundry from "./facial.png"
 import swimmingPool from "./swimming-pool.png"
 import logo from "./logo.png"
+import HeroImage from "./slider2.png"
+
 
 export const cities = [
     "Hà Nội",
@@ -20,6 +22,7 @@ export const cities = [
 ]
 
 export const assets = {
+    HeroImage,
     logo,
     family,
     food,
