@@ -11,7 +11,14 @@ import laundry from "./facial.png"
 import swimmingPool from "./swimming-pool.png"
 import logo from "./logo.png"
 import HeroImage from "./slider2.png"
-
+import langman1 from "./langman1.jpg"
+import langman2 from "./langman2.png"
+import langman3 from "./langmang3.png"
+import hoangda1 from "./hoangda2.jpg"
+import hoangda2 from "./hoangda3.jpg"
+import hoangda4 from "./hoangda4.jpg"
+import sangtrong1 from "./sangtrong1.png"
+import sangtrong2 from "./sangtrong2.png"
 
 export const cities = [
     "Hà Nội",
@@ -136,13 +143,49 @@ export const hotelDummyData = {
 export const roomDummyData = [
     {
         "_id": "1",
+
         "name": "Phòng Deluxe",
-        "hotel": "1",
+        "hotel": hotelDummyData,
+        "roomType": "Double Bed",
         "pricePerNight": 100,
         "amenities": ["Spa", "Room Service"],
-        "image": [],
+        "images": [sangtrong1, sangtrong2],
+        "description": "Phòng Deluxe với thiết kế sang trọng và tiện nghi hiện đại, phù hợp cho các cặp đôi hoặc gia đình.",
         "isAvailable": true,
-    }
+    },
+    {
+        "_id": "2",
+        "name": "Phòng Superior",
+        "hotel": hotelDummyData,
+        "roomType": "Double Bed",
+        "pricePerNight": 80,
+        "amenities": ["Gym", "Breakfast"],
+        "images": [hoangda1, hoangda2, hoangda4],
+        "description": "Phòng Superior với không gian thoải mái và đầy đủ tiện nghi, lý tưởng cho chuyến công tác hoặc nghỉ dưỡng.",
+        "isAvailable": true,
+    },
+    {
+        "_id": "3",
+        "name": "Phòng Standard",
+        "hotel": hotelDummyData,
+        "roomType": "Single Bed",
+        "pricePerNight": 60,
+        "amenities": ["Parking", "Laundry"],
+        "images": [langman1, langman2, langman3],
+        "description": "Phòng Standard với giá cả phải chăng và dịch vụ tốt nhất, phù hợp cho những ai muốn tiết kiệm chi phí.",
+        "isAvailable": true,
+    },
+    {
+        "_id": "3",
+        "name": "Phòng Standard",
+        "hotel": hotelDummyData,
+        "roomType": "Single Bed",
+        "pricePerNight": 60,
+        "amenities": ["Parking", "Laundry"],
+        "images": [langman1, langman2, langman3],
+        "description": "Phòng Standard với giá cả phải chăng và dịch vụ tốt nhất, phù hợp cho những ai muốn tiết kiệm chi phí.",
+        "isAvailable": true,
+    },
 ]
 
 export const userDummyData = {
