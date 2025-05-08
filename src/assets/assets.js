@@ -3,13 +3,13 @@ import food from "./food.jpg"
 import romantic from "./romantic.webp"
 import sea from "./sea.webp"
 import clothes from "./clothes.png"
-import spa from "./spa.png"
 import gym from "./treadmill_2382633.png"
 import breakfast from "./breakfast.png"
 import parking from "./parking.png"
 import roomService from "./food-serving.png"
 import laundry from "./facial.png"
 import swimmingPool from "./swimming-pool.png"
+import logo from "./logo.png"
 
 export const cities = [
     "Hà Nội",
@@ -20,12 +20,12 @@ export const cities = [
 ]
 
 export const assets = {
+    logo,
     family,
     food,
     romantic,
     sea,
     clothes,
-    spa,
     gym,
     breakfast,
     parking,
@@ -100,7 +100,7 @@ export const testimonials = [
 
 export const facilities = {
     "Swimming Pool": assets.swimmingPool,
-    "Spa": assets.spa,
+    "Spa": assets.facial,
     "Gym": assets.gym,
     "Breakfast": assets.breakfast,
     "Parking": assets.parking,
