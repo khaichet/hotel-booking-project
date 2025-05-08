@@ -1,9 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { assets } from '../assets/assets';
 import { CloseOutlined, MenuOutlined, SearchOutlined } from '@ant-design/icons';
-import { useClerk, useUser } from '@clerk/clerk-react';
+import { useClerk, UserButton, useUser } from '@clerk/clerk-react';
 
+
+const BookIcon = () => (
+    <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" >
+        <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+    </svg>
+)
 const Navbar = () => {
 
     const navLinks = [
@@ -18,7 +24,10 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
     const { openSignIn } = useClerk()
-    const { use } = useUser()
+    const { user } = useUser()
+
+    const navigate = useNavigate()
+    const location = useLocation()
 
     React.useEffect(() => {
         const handleScroll = () => {
@@ -49,10 +58,25 @@ const Navbar = () => {
 
             <div className="hidden md:flex items-center gap-4">
                 <SearchOutlined alt="search" className={`${isScrolled && 'invert'} h-7 transition-all duration-500 `} />
-                <button onClick={openSignIn} className="bg-black text-white px-8 py-2.5 rounded-full ml-4 transition-all duration-500">
-                    Login
-                </button>
+
+                {user ? (
+                    <UserButton>
+                        <UserButton.MenuItems>
+                            <UserButton.Action label="My Bookings" labelIcon={<BookIcon />} onClick={() => navigate('/my-bookings')} />
+                        </UserButton.MenuItems>
+                    </UserButton>
+                ) : (
+                    <button onClick={openSignIn} className="bg-black text-white px-8 py-2.5 rounded-full ml-4 transition-all duration-500">
+                        Login
+                    </button>
+                )}
+
             </div>
+            {user && <UserButton>
+                <UserButton.MenuItems>
+                    <UserButton.Action label="My Bookings" labelIcon={<BookIcon />} onClick={() => navigate('/my-bookings')} />
+                </UserButton.MenuItems>
+            </UserButton>}
 
             <div className="flex items-center gap-3 md:hidden">
                 <MenuOutlined onClick={() => setIsMenuOpen(!isMenuOpen)} alt="" className={`${isScrolled && 'invert'} h-4`} />
@@ -69,13 +93,13 @@ const Navbar = () => {
                     </a>
                 ))}
 
-                <button className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all">
+                {user && <button onClick={() => navigate('/owner')} className="border px-4 py-1 text-sm font-light rounded-full cursor-pointer transition-all">
                     Dashboard
-                </button>
+                </button>}
 
-                <button onClick={openSignIn} className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500">
+                {!user && <button onClick={openSignIn} className="bg-black text-white px-8 py-2.5 rounded-full transition-all duration-500">
                     Login
-                </button>
+                </button>}
             </div>
         </nav >
     );
