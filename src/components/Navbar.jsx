@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { assets } from '../assets/assets';
 import { CloseOutlined, MenuOutlined, SearchOutlined } from '@ant-design/icons';
@@ -20,8 +20,8 @@ const Navbar = () => {
     ];
 
 
-    const [isScrolled, setIsScrolled] = React.useState(false);
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const { openSignIn } = useClerk()
     const { user } = useUser()
@@ -29,7 +29,15 @@ const Navbar = () => {
     const navigate = useNavigate()
     const location = useLocation()
 
-    React.useEffect(() => {
+    useEffect(() => {
+        if (location.pathname !== '/') {
+            setIsScrolled(true)
+            return
+        } else {
+            setIsScrolled(false)
+        }
+        setIsScrolled(prev => location.pathname !== '/' ? true : prev)
+
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 10);
         };
@@ -51,7 +59,7 @@ const Navbar = () => {
                         <div className={`${isScrolled ? "bg-gray-700" : "bg-white"} h-0.5 w-0 group-hover:w-full transition-all duration-300`} />
                     </a>
                 ))}
-                <button className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${isScrolled ? 'text-black' : 'text-white'} transition-all`}>
+                <button onClick={() => navigate('/owner')} className={`border px-4 py-1 text-sm font-light rounded-full cursor-pointer ${isScrolled ? 'text-black' : 'text-white'} transition-all`}>
                     Dashboard
                 </button>
             </div>
@@ -72,13 +80,16 @@ const Navbar = () => {
                 )}
 
             </div>
-            {user && <UserButton>
-                <UserButton.MenuItems>
-                    <UserButton.Action label="My Bookings" labelIcon={<BookIcon />} onClick={() => navigate('/my-bookings')} />
-                </UserButton.MenuItems>
-            </UserButton>}
+
+
 
             <div className="flex items-center gap-3 md:hidden">
+
+                {user && <UserButton>
+                    <UserButton.MenuItems>
+                        <UserButton.Action label="My Bookings" labelIcon={<BookIcon />} onClick={() => navigate('/my-bookings')} />
+                    </UserButton.MenuItems>
+                </UserButton>}
                 <MenuOutlined onClick={() => setIsMenuOpen(!isMenuOpen)} alt="" className={`${isScrolled && 'invert'} h-4`} />
             </div>
 
